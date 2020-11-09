@@ -1,5 +1,7 @@
 # Build
+```bash
 GOOS=linux GOARCH=amd64 go build -ldflags="-w -s -X 'main.Version=v2.0.0' -X 'github.com/bioform/go-test/build.User=$(id -u -n)' -X 'github.com/bioform/go-test/build.Time=$(LANG=en_us_88591; date)'" .
+```
 
 ```
 -s
