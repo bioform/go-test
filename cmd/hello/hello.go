@@ -4,14 +4,17 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/bioform/go-test/build"
-	"github.com/bioform/go-test/greeting"
+	"github.com/bioform/go-test/internal/build"
+	"github.com/bioform/go-test/internal/greeting"
+
+	"rsc.io/quote"
 )
 
 // Version of application
 var Version = "development"
 
 func main() {
+	fmt.Println(quote.Go())
 	fmt.Printf("Version %s\n", Version)
 	fmt.Println("build.Time:\t", build.Time)
 	fmt.Println("build.User:\t", build.User)
