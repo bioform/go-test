@@ -1,17 +1,18 @@
 package greeting
 
 import (
-	"errors"
 	"fmt"
+
+	"github.com/go-errors/errors"
 )
 
 // ErrEmptyName - empty "name" attribute is restricted
-var ErrEmptyName = errors.New("NAME cannot be empty")
+var ErrEmptyName = errors.Errorf("NAME cannot be empty")
 
 // Greet - display hellow string
 func Greet(name string) (string, error) {
 	if len(name) == 0 {
-		return "", ErrEmptyName
+		return "", errors.Wrap(ErrEmptyName, 1)
 	}
 
 	return compileGreeting(name), nil
