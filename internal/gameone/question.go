@@ -2,6 +2,6 @@ package gameone
 
 // Question describes a scene question
 type Question struct {
-	text    string   `yaml:"text"`
-	answers []Answer `yaml:"answers"`
+	Text    string   `yaml:"Текст"`
+	Answers []Answer `yaml:"Ответы"`
 }

@@ -6,10 +6,10 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-// LoadScene loads initial scene from YAML file
-func LoadScene(configPath string) (*Scene, error) {
+// LoadBook loads scenario from YAML file
+func LoadBook(configPath string) (*Book, error) {
 	// Create config structure
-	scene := &Scene{}
+	book := Book{}
 
 	// Open config file
 	file, err := os.Open(configPath)
@@ -20,11 +20,12 @@ func LoadScene(configPath string) (*Scene, error) {
 
 	// Init new YAML decode
 	d := yaml.NewDecoder(file)
+	d.SetStrict(true)
 
 	// Start YAML decoding from file
-	if err := d.Decode(&scene); err != nil {
+	if err := d.Decode(&book); err != nil {
 		return nil, err
 	}
 
-	return scene, nil
+	return &book, nil
 }
