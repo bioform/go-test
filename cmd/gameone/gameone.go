@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/bioform/go-test/internal/gameone"
+	"github.com/bioform/go-test/internal/gameone/storage"
 	"github.com/inancgumus/screen"
 )
 
@@ -17,5 +18,18 @@ func main() {
 		panic(err)
 	}
 
-	book.Run()
+	firstScene := &book.Scene
+
+	sceneId, err := storage.GetInstance().ReadLastPosition()
+	if err != nil {
+		panic(err)
+	}
+	if sceneId != nil {
+		firstScene = book.Scenes[*sceneId]
+	}
+
+	err = book.Run(firstScene)
+	if err != nil {
+		panic(err)
+	}
 }

@@ -2,6 +2,11 @@
 # Project structure
 https://github.com/golang-standards/project-layout
 
+# Run gameone
+```bash
+go run cmd/gameone/gameone.go
+```
+
 # Build
 ```bash
 GOOS=linux GOARCH=amd64 go build -ldflags="-w -s -X 'main.Version=v2.0.0' -X 'github.com/bioform/go-test/build.User=$(id -u -n)' -X 'github.com/bioform/go-test/build.Time=$(LANG=en_us_88591; date)'" .
@@ -9,7 +14,7 @@ GOOS=linux GOARCH=amd64 go build -ldflags="-w -s -X 'main.Version=v2.0.0' -X 'gi
 
 # Build game
 ```bash
-GOOS=windows GOARCH=amd64 go build -ldflags="-w -s -X 'main.Version=v2.0.0'" cmd/gameone/gameone.go
+GOOS=windows GOARCH=amd64 go build -ldflags="-w -s -X 'main.Version=v2.0.0' -X 'github.com/bioform/go-test/internal/gameone/os.Pointer=>' -X 'github.com/bioform/go-test/internal/gameone/os.Checkmark=√'" cmd/gameone/gameone.go
 ```
 
 ```

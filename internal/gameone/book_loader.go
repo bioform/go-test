@@ -27,5 +27,36 @@ func LoadBook(configPath string) (*Book, error) {
 		return nil, err
 	}
 
+	collectAllScenes(&book)
+
 	return &book, nil
+}
+
+func collectAllScenes(book *Book) {
+	book.Scenes = map[string]*Scene{}
+
+	scenes := []*Scene{&book.Scene}
+	for len(scenes) > 0 {
+
+		// clone scenes and clear the original slice
+		children := make([]*Scene, len(scenes))
+		copy(children, scenes)
+		scenes = nil
+
+		// add all children to AllScenes and fill in new scenes for processing
+		for _, scene := range children {
+			_, isProcessed := book.Scenes[scene.ID]
+
+			if !isProcessed {
+				book.Scenes[scene.ID] = scene
+
+				// prepare next scenes for processing
+				if scene.Question != nil {
+					for _, answer := range scene.Question.Answers {
+						scenes = append(scenes, answer.Scene)
+					}
+				}
+			}
+		}
+	}
 }
